@@ -1,0 +1,295 @@
+﻿@model HopDongCSHT.HDContext.HopDong
+
+@{
+    ViewBag.Header = "Thêm mới Hợp đồng Cơ sở hạ tầng ";
+    ViewBag.Bread = "Hợp đồng CSHT";
+    ViewBag.Title = "Hợp đồng CSHT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row margin20">
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @id = "registerFormId", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+        <div class="row">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Thông tin hợp đồng</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="SoHopDong" class="col-sm-4 control-label">Số Hợp đồng</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.SoHopDong, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.SoHopDong, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ten_HD, "Tên Hợp đồng", new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.Ten_HD, new { @class = "form-control", rows = "5" })
+                                @Html.ValidationMessageFor(m => m.Ten_HD, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ten_HD, "LoaiHD", new { @class = "col-md-4 control-label", rows = "5" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.LoaiHD, new { @class = "form-control" })
+                                @*@Html.ValidationMessageFor(m => m.LoaiHD, "", new { @class = "text-danger  " })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CSHT_DiaChi, "Địa chỉ CSHT", new { @class = "col-md-4 control-label", @rows = "5" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.CSHT_DiaChi, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CSHT_DiaChi, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ThoiGianThue, "Số tháng thuê", new { @class = "col-md-4 control-label", rows = "5" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.ThoiGianThue, new { @class = "form-control", type = "number" })
+                                @Html.ValidationMessageFor(m => m.ThoiGianThue, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TuNgay, "Từ ngày", new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.TuNgay, new { @class = "form-control", @data_inputmask = "'alias': 'dd/mm/yyyy'", @data_mask = "" })
+                                @Html.ValidationMessageFor(m => m.TuNgay, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DenNgay, "Đến ngày", new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.DenNgay, new { @class = "form-control", @data_inputmask = "'alias': 'dd/mm/yyyy'", @data_mask = "" })
+                                @Html.ValidationMessageFor(m => m.DenNgay, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DonGia, "Đơn giá/ Tháng", new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.DonGia, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DonGia, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Thông tin bên A</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="Ten_A" class="col-sm-4 control-label">Tên Bên A</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.Ten_A, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Ten_A, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.A_DiaChi, "Địa chỉ bên A", new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(m => m.A_DiaChi, new { @class = "form-control", rows = "3" })
+                                @Html.ValidationMessageFor(m => m.A_DiaChi, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="A_DienThoai" class="col-sm-4 control-label">Số điện thoại</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.A_DienThoai, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.A_DienThoai, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="A_MST" class="col-sm-4 control-label">Mã số thuế</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.A_MST, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.A_MST, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="A_DaiDien" class="col-sm-4 control-label">Đại diện</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.A_DaiDien, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.A_DaiDien, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="A_ChucVu" class="col-sm-4 control-label">Chức Vụ</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.A_ChucVu, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.A_ChucVu, "", new { @class = "text-danger  " })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin20">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/custom-validator")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-mask]').inputmask();
+
+            jQuery.validator.addMethod("greaterThanZero", function (value, element) {
+                return this.optional(element) || (parseFloat(value) > 0);
+            });
+            jQuery.validator.addMethod("CheckDenNgay", function (value, element) {
+                var x = $('#ThoiGianThue').val();
+                var y = $('#TuNgay').val();
+                var fm = moment(y).add(x, 'M');
+                var fms = moment(fm).subtract(1, 'days');
+                if (moment(value, 'DD/MM/YYYY').isSame(fms)) {
+                    return true;
+                }
+                return false;
+
+            });
+
+            //$('#DonGia').simpleMoneyFormat();
+            $('#registerFormId').validate({
+                errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'SoHopDong': {
+                        required: true
+                    },
+
+                    'Ten_HD': {
+                        required: true,
+                        minlength: 12
+                    },
+
+                    'CSHT_DiaChi': {
+                        required: true,
+                        minlength: 12
+                    },
+                    'ThoiGianThue': {
+                        required: true,
+                        digits: true,
+                        greaterThanZero: true
+                    },
+                    TuNgay: {
+                        required: true
+                        //date: true
+                    },
+                    DenNgay: {
+                        required: true,
+                        CheckDenNgay: true
+                        //date: true
+                    },
+                    Ten_A: {
+                        required: true
+                    },
+                    A_DiaChi: {
+                        required: true
+                    },
+                    A_DienThoai: {
+                        required: true
+                    },
+                    A_MST: {
+                        required: true
+                    },
+                    A_DaiDien: {
+                        required: true
+                    },
+                    A_ChucVu: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    'SoHopDong': 'Số hợp đồng không được để trống!',
+
+                    'Ten_HD': {
+                        required: 'Tên hợp đồng không được để trống!',
+                        minlength: 'Tên hợp đồng không được ít hơn 12 ký tự!'
+                    },
+
+                    'CSHT_DiaChi': {
+                        required: 'Địa chỉ Cơ sở hạ tầng không được để trống!',
+                        minlength: 'Địa chỉ Cơ sở hạ tầng không được ít hơn 12 ký tự!',
+                    },
+                    'ThoiGianThue': {
+                        required: 'Thời gian thuê không được để trống!',
+                        digits: 'Thời gian thuê phải là số nguyên!',
+                        greaterThanZero: 'Thời gian thuê phải lớn hơn 0'
+                    },
+                    'TuNgay': {
+                        required: 'Từ ngày không được để trống!',
+
+                    },
+                    'DenNgay': {
+                        required: 'Đến ngày không được để trống!',
+                        CheckDenNgay: 'Đến ngày không đúng. Đến ngày = Từ ngày + số tháng thuê - 1 ngày!'
+                    },
+                    'Ten_A': {
+                        required: 'Tên Bên A không được để trống!',
+                    },
+                    'A_DiaChi': {
+                        required: 'Địa chỉ bên A không được để trống!',
+                    },
+                    'A_DienThoai': {
+                        required: 'Điện thoại bên A không được để trống!',
+                    },
+                    'A_MST': {
+                        required: 'Mã số thuế bên A không được để trống!',
+                    },
+                    'A_DaiDien': {
+                        required: 'Đại diện bên A không được để trống!',
+                    },
+                    'A_ChucVu': {
+                        required: 'Đại diện bên A không được để trống!',
+                    }
+                }
+            });
+
+
+        });
+    </script>
+}

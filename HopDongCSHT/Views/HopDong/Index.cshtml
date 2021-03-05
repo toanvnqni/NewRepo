@@ -1,0 +1,209 @@
+﻿@model IEnumerable<HopDongCSHT.HDContext.HopDong>
+
+@{
+    ViewBag.Header = "Hợp đồng Cơ sở hạ tầng";
+    ViewBag.Bread = "Hợp đồng CSHT";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row margin20">
+    <div class="box box-info">
+        <div class="box-header">
+            <h3 class="box-title">Tìm kiếm</h3>
+        </div>
+        <div class="box-body">
+            <form class="form-horizontal ">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="txtHopDongID" class="col-sm-4 control-label">Số hợp đồng</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txtHopDongID" placeholder="Số hợp đồng">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtTenHD" class="col-sm-4 control-label">Tên hợp đồng</label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txtTenHD" placeholder="Tên hợp đồng">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Từ ngày</label>
+
+                        <div class="input-group col-sm-8">
+                            @*<div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>*@
+                            <input type="text" id="tuNgay" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Đến ngày</label>
+
+                        <div class="input-group col-sm-8">
+                            @*<div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>*@
+                            <input type="text" id="denNgay" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box-footer">
+            <button id="btnSearch" class="btn btn-info center-block">Tìm kiếm</button>
+        </div>
+    </div>
+</div>
+<div class="row text-right">
+    <p>
+        <a href="/HopDong/Create" class="btn btn-flat bg-primary margin">Thêm mới</a>
+        <button type="button" class="btn btn-default btn-flat">Sửa</button>
+        <button type="button" class="btn btn-flat btn-default  margin">Xóa</button>
+    </p>
+</div>
+<div class="row">
+    <div class="box box-info">
+        <div class="box-body">
+            <table class="table display responsive cell-border" style="width:100%" id="example">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayName("Số hợp đồng")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Tên hợp đồng")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Địa chỉ CSHT")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Từ ngày")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Đến Ngày")
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.Label(item.ID.ToString())</td>
+                            <td>
+                                @Html.Label(item.SoHopDong)
+                            </td>
+                            <td>
+                                @Html.Label(item.Ten_HD)
+                            </td>
+                            <td>
+                                @Html.Label(item.CSHT_DiaChi)
+                            </td>
+                            <td>
+                                @Html.Label(item.TuNgay.ToShortDateString())
+                            </td>
+                            <td>
+                                @Html.Label(item.DenNgay.ToShortDateString())
+                            </td>
+                            <td>
+                                @*@Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "fa fa-eye" })*@
+                                @*<a href="/HopDong/Details='" class="dropdown-toggle">
+                                        <i class="fa fa-eye"></i>
+                                    </a>*@
+                                <a href=@Url.Action("Details","HopDong" , new { id = item.ID }) class="dropdown-toggle" data-toggle="tooltip" title="Xem chi tiết">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="tooltip" title="Sửa">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="tooltip" title="Xóa">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                responsive: true,
+                select: true,
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [4],
+                        "type":'date'
+                    },
+                ]
+
+
+            });
+
+            $('[data-mask]').inputmask();
+
+            //Ham search theo tu ngay - den ngay
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+
+
+                    var valid = true;
+                    var min = moment($("#tuNgay").val());
+                    if (!min.isValid()) { min = null; }
+
+                    var max = moment($("#denNgay").val());
+                    if (!max.isValid()) { max = null; }
+
+                    if (min === null && max === null) {
+                        // no filter applied or no date columns
+                        valid = true;
+                    }
+                    else {
+
+                        $.each(settings.aoColumns, function (i, col) {
+
+                            if (col.type == "date") {
+                                var cDate = moment(data[i], 'DD/MM/YYYY');
+
+                                if (cDate.isValid()) {
+                                    if (max !== null && max.isBefore(cDate)) {
+                                        valid = false;
+                                    }
+                                    if (min !== null && cDate.isBefore(min)) {
+                                        valid = false;
+                                    }
+                                }
+                                else {
+                                    valid = false;
+                                }
+                            }
+                        });
+                    }
+                    return valid;
+                });
+
+            $('#btnSearch').click(function () {
+                table.column(1).search($("#txtHopDongID").val()).column(2).search($("#txtTenHD").val()).draw();
+            });
+        });
+
+
+    </script>
+}

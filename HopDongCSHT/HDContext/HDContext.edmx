@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CSHT_QNHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HopDong">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoHopDong" Type="varchar" MaxLength="50" />
+          <Property Name="Ten_HD" Type="nvarchar" MaxLength="500" />
+          <Property Name="LoaiHD" Type="varchar" MaxLength="10" />
+          <Property Name="CSHT_DiaChi" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Ten_A" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="A_DiaChi" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="A_DienThoai" Type="varchar" MaxLength="12" />
+          <Property Name="A_MST" Type="nchar" MaxLength="10" />
+          <Property Name="A_DaiDien" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_ChucVu" Type="nvarchar" MaxLength="150" />
+          <Property Name="ThoiGianThue" Type="int" />
+          <Property Name="TuNgay" Type="date" Nullable="false" />
+          <Property Name="DenNgay" Type="date" Nullable="false" />
+          <Property Name="DonGia" Type="float" />
+        </EntityType>
+        <EntityType Name="Luu_File">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten_File" Type="nvarchar" MaxLength="250" />
+          <Property Name="Duong_dan" Type="varchar" MaxLength="500" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Map_HD_File">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HD_ID" Type="int" />
+          <Property Name="File_ID" Type="int" />
+          <Property Name="ColOrder" Type="int" />
+        </EntityType>
+        <EntityContainer Name="CSHT_QNHModelStoreContainer">
+          <EntitySet Name="HopDong" EntityType="Self.HopDong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Luu_File" EntityType="Self.Luu_File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Map_HD_File" EntityType="Self.Map_HD_File" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CSHT_QNHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HopDong">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoHopDong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ten_HD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CSHT_DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ten_A" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="A_DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="A_DienThoai" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="A_MST" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="A_DaiDien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_ChucVu" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiGianThue" Type="Int32" />
+          <Property Name="TuNgay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DenNgay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DonGia" Type="Double" />
+        </EntityType>
+        <EntityType Name="Luu_File">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten_File" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Duong_dan" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Map_HD_File">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HD_ID" Type="Int32" />
+          <Property Name="File_ID" Type="Int32" />
+          <Property Name="ColOrder" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="CSHT_QNHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HopDongs" EntityType="Self.HopDong" />
+          <EntitySet Name="Luu_File" EntityType="Self.Luu_File" />
+          <EntitySet Name="Map_HD_File" EntityType="Self.Map_HD_File" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CSHT_QNHModelStoreContainer" CdmEntityContainer="CSHT_QNHEntities">
+          <EntitySetMapping Name="HopDongs">
+            <EntityTypeMapping TypeName="CSHT_QNHModel.HopDong">
+              <MappingFragment StoreEntitySet="HopDong">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SoHopDong" ColumnName="SoHopDong" />
+                <ScalarProperty Name="Ten_HD" ColumnName="Ten_HD" />
+                <ScalarProperty Name="LoaiHD" ColumnName="LoaiHD" />
+                <ScalarProperty Name="CSHT_DiaChi" ColumnName="CSHT_DiaChi" />
+                <ScalarProperty Name="Ten_A" ColumnName="Ten_A" />
+                <ScalarProperty Name="A_DiaChi" ColumnName="A_DiaChi" />
+                <ScalarProperty Name="A_DienThoai" ColumnName="A_DienThoai" />
+                <ScalarProperty Name="A_MST" ColumnName="A_MST" />
+                <ScalarProperty Name="A_DaiDien" ColumnName="A_DaiDien" />
+                <ScalarProperty Name="A_ChucVu" ColumnName="A_ChucVu" />
+                <ScalarProperty Name="ThoiGianThue" ColumnName="ThoiGianThue" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Luu_File">
+            <EntityTypeMapping TypeName="CSHT_QNHModel.Luu_File">
+              <MappingFragment StoreEntitySet="Luu_File">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ten_File" ColumnName="Ten_File" />
+                <ScalarProperty Name="Duong_dan" ColumnName="Duong_dan" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Map_HD_File">
+            <EntityTypeMapping TypeName="CSHT_QNHModel.Map_HD_File">
+              <MappingFragment StoreEntitySet="Map_HD_File">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HD_ID" ColumnName="HD_ID" />
+                <ScalarProperty Name="File_ID" ColumnName="File_ID" />
+                <ScalarProperty Name="ColOrder" ColumnName="ColOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

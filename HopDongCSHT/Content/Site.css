@@ -1,0 +1,19 @@
+﻿table label {
+    font-weight: 500 !important;
+}
+
+/*.btn-download{
+    margin-right:20px !important;
+}*/
+.margin20 {
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+}
+
+.help-block {
+    color: red !important;
+}
+
+.has-error input {
+    background: rgba(166, 66, 66, 0.69);
+}
